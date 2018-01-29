@@ -3,6 +3,14 @@
   
     
     <entry>
+      <title><![CDATA[Elasticsearch-实践篇]]></title>
+      <url>/2018/01/29/Elasticsearch-%E5%AE%9E%E8%B7%B5%E7%AF%87/</url>
+      <content type="html"></content>
+      
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Elasticsearch-索引篇]]></title>
       <url>/2018/01/12/Elasticsearch-%E7%B4%A2%E5%BC%95%E7%AF%87/</url>
       <content type="html"><![CDATA[<h2 id="Elasticsearch索引原理"><a href="#Elasticsearch索引原理" class="headerlink" title="Elasticsearch索引原理"></a>Elasticsearch索引原理</h2><p>Elasticsearch的核心是搜索，为了最大化搜索的性能，Elasticsearch内部采用了倒排索引的思路。当然，万物相生相克，在搜索性能提升的同时，无法避免会增加更新等操作的成本，对于Elasticsearch来说是可以的。</p>
