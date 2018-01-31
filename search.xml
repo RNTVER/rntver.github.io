@@ -13,20 +13,19 @@
 <li><p>解压：<code>tar -zxvf elasticsearch-5.6.7.tar.gz</code></p>
 </li>
 <li><p>运行es：<code>./bin/elasticsearch</code>  </p>
+<p>  启动es的时候可能会出现如下错误</p>
+<blockquote>
+<p>No Java runtime present, requesting install. Elasticsearch requires at least Java 8 but your Java version from /usr/bin/java does not meet this requirement</p>
+</blockquote>
+<p>  <img src="/img/20170131/log2017013100.png" alt=""></p>
+<p>  相关问题错误信息已经描述很清楚了，毕竟es是用Java写的，因此需要安装Java环境并不过分对吧哈哈哈。Java环境安装就不在这里记录了，我用的是Mac，利用强大的homebrew工具分分钟解决。</p>
+<p>  安装好Java环境之后，重新启动es，出现如下信息就代表成功了。</p>
+<p>  <img src="/img/20170131/log2017013101.png" alt=""></p>
+</li>
+<li><p>测试： 在浏览器中输入<code>http://localhost:9200/</code>，出现如下信息就代表es已经正常运行了</p>
+<p>  <img src="/img/20170131/log2017013102.png" alt=""> </p>
 </li>
 </ul>
-<p>启动es的时候可能会出现如下错误</p>
-<blockquote>
-<p>No Java runtime present, requesting install.<br>Elasticsearch requires at least Java 8 but your Java version from /usr/bin/java does not meet this requirement</p>
-</blockquote>
-<p><img src="/img/20170131/log2017013100.png" alt=""></p>
-<p>相关问题错误信息已经描述很清楚了，毕竟es是用Java写的，因此需要安装Java环境并不过分对吧哈哈哈。Java环境安装就不在这里记录了，我用的是Mac，利用强大的homebrew工具分分钟解决。</p>
-<p>安装好Java环境之后，重新启动es，出现如下信息就代表成功了。</p>
-<p><img src="/img/20170131/log2017013101.png" alt=""></p>
-<ul>
-<li>测试： 在浏览器中输入<code>http://localhost:9200/</code>，出现如下信息就代表es已经正常运行了</li>
-</ul>
-<p><img src="/img/20170131/log2017013102.png" alt=""> </p>
 ]]></content>
       
         <categories>
