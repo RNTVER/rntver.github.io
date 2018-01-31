@@ -12,7 +12,7 @@
 </li>
 <li><p>解压：<code>tar -zxvf elasticsearch-5.6.7.tar.gz</code></p>
 </li>
-<li><p>运行es：<code>./bin/elasticsearch</code>  </p>
+<li><p>运行es：<code>./bin/elasticsearch</code> 如果需要后台运行，执行<code>./bin/elasticsearch -d</code> </p>
 <p>  启动es的时候可能会出现如下错误</p>
 <blockquote>
 <p>No Java runtime present, requesting install. Elasticsearch requires at least Java 8 but your Java version from /usr/bin/java does not meet this requirement</p>
