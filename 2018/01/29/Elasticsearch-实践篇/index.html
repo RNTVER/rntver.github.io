@@ -79,14 +79,21 @@
 
 
 
+<meta name="description" content="Elasticsearch实践前两篇文章初步介绍了Elasticsearch的基础和索引，因此第三篇我决定写一下如何利用Elasticsearch来搭建一个搜索服务以及工作中常用的维护手段。  注：由于条件有限，本次介绍的是单机部署，没有用到分布式部署，后续会在这篇文章中更新分布式部署细节。 Linux下安装和部署1 ">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Elasticsearch-实践篇">
 <meta property="og:url" content="http://yoursite.com/2018/01/29/Elasticsearch-实践篇/index.html">
 <meta property="og:site_name" content="Jacob&#39;s Blog">
+<meta property="og:description" content="Elasticsearch实践前两篇文章初步介绍了Elasticsearch的基础和索引，因此第三篇我决定写一下如何利用Elasticsearch来搭建一个搜索服务以及工作中常用的维护手段。  注：由于条件有限，本次介绍的是单机部署，没有用到分布式部署，后续会在这篇文章中更新分布式部署细节。 Linux下安装和部署1 下载安装 大家可以从官网下载es的压缩包，也可以通过其他渠道获取相关资源，比如我">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-29T02:58:51.000Z">
+<meta property="og:image" content="http://yoursite.com/img/20170131/log2017013100.png">
+<meta property="og:image" content="http://yoursite.com/img/20170131/log2017013101.png">
+<meta property="og:image" content="http://yoursite.com/img/20170131/log2017013102.png">
+<meta property="og:updated_time" content="2018-01-31T07:36:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Elasticsearch-实践篇">
+<meta name="twitter:description" content="Elasticsearch实践前两篇文章初步介绍了Elasticsearch的基础和索引，因此第三篇我决定写一下如何利用Elasticsearch来搭建一个搜索服务以及工作中常用的维护手段。  注：由于条件有限，本次介绍的是单机部署，没有用到分布式部署，后续会在这篇文章中更新分布式部署细节。 Linux下安装和部署1 下载安装 大家可以从官网下载es的压缩包，也可以通过其他渠道获取相关资源，比如我">
+<meta name="twitter:image" content="http://yoursite.com/img/20170131/log2017013100.png">
 
 
 
@@ -323,6 +330,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开源技术/" itemprop="url" rel="index">
+                    <span itemprop="name">开源技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -350,7 +379,29 @@
       
 
       
-        
+        <h2 id="Elasticsearch实践"><a href="#Elasticsearch实践" class="headerlink" title="Elasticsearch实践"></a>Elasticsearch实践</h2><p>前两篇文章初步介绍了Elasticsearch的基础和索引，因此第三篇我决定写一下如何利用Elasticsearch来搭建一个搜索服务以及工作中常用的维护手段。</p>
+<p><strong> 注：由于条件有限，本次介绍的是单机部署，没有用到分布式部署，后续会在这篇文章中更新分布式部署细节。</strong></p>
+<h2 id="Linux下安装和部署"><a href="#Linux下安装和部署" class="headerlink" title="Linux下安装和部署"></a>Linux下安装和部署</h2><h3 id="1-下载安装"><a href="#1-下载安装" class="headerlink" title="1 下载安装"></a>1 下载安装</h3><ul>
+<li><p>大家可以从<a href="https://www.elastic.co/cn/" target="_blank" rel="noopener">官网</a>下载es的压缩包，也可以通过其他渠道获取相关资源，比如我是从官网下载的<code>elasticsearch-5.6.7.tar.gz</code>压缩包。</p>
+</li>
+<li><p>解压：<code>tar -zxvf elasticsearch-5.6.7.tar.gz</code></p>
+</li>
+<li><p>运行es：<code>./bin/elasticsearch</code>  </p>
+</li>
+</ul>
+<p>启动es的时候可能会出现如下错误</p>
+<blockquote>
+<p>No Java runtime present, requesting install.<br>Elasticsearch requires at least Java 8 but your Java version from /usr/bin/java does not meet this requirement</p>
+</blockquote>
+<p><img src="/img/20170131/log2017013100.png" alt=""></p>
+<p>相关问题错误信息已经描述很清楚了，毕竟es是用Java写的，因此需要安装Java环境并不过分对吧哈哈哈。Java环境安装就不在这里记录了，我用的是Mac，利用强大的homebrew工具分分钟解决。</p>
+<p>安装好Java环境之后，重新启动es，出现如下信息就代表成功了。</p>
+<p><img src="/img/20170131/log2017013101.png" alt=""></p>
+<ul>
+<li>测试： 在浏览器中输入<code>http://localhost:9200/</code>，出现如下信息就代表es已经正常运行了</li>
+</ul>
+<p><img src="/img/20170131/log2017013102.png" alt=""> </p>
+
       
     </div>
     
@@ -434,8 +485,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -492,6 +552,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Elasticsearch实践"><span class="nav-number">1.</span> <span class="nav-text">Elasticsearch实践</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux下安装和部署"><span class="nav-number">2.</span> <span class="nav-text">Linux下安装和部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-下载安装"><span class="nav-number">2.1.</span> <span class="nav-text">1 下载安装</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
