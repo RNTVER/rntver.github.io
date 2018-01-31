@@ -19,8 +19,10 @@
 </blockquote>
 <p> <img src="/img/20180131/log2018013100.png" alt=""></p>
 <p>  相关问题错误信息已经描述很清楚了，毕竟es是用Java写的，因此需要安装Java环境并不过分对吧哈哈哈。Java环境安装就不在这里记录了，我用的是Mac，利用强大的homebrew工具分分钟解决。</p>
-<p>  安装好Java环境之后，重新启动es，出现如下信息就代表成功了。</p>
+<p>  安装好Java环境之后，重新启动es，如果不是后台运行，出现如下信息就代表成功了,</p>
 <p> <img src="/img/20180131/log2018013101.png" alt=""></p>
+<p> 如果是后台运行，<code>ps -ef | grep &#39;elas&#39;</code>看一下进程是否启动即可，如下</p>
+<p> <img src="/img/20180131/log2018013103.png" alt=""></p>
 </li>
 <li><p>测试： 在浏览器中输入<code>http://localhost:9200/</code>，出现如下信息就代表es已经正常运行了</p>
 <p> <img src="/img/20180131/log2018013102.png" alt=""> </p>
