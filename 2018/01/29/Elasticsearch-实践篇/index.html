@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="Elasticsearch实践前两篇文章初步介绍了Elasticsearch的基础和索引，因此第三篇我决定写一下如何利用Elasticsearch来搭建一个搜索服务以及工作中常用的维护手段。  注：由于条件有限，本次介绍的是单机部署，没有用到分布式部署，后续会在这篇文章中更新分布式部署细节。 Linux下安装和部署1 ">
+<meta name="description" content="Elasticsearch实践前两篇文章初步介绍了Elasticsearch的基础和索引，因此第三篇我决定写一下如何利用Elasticsearch来搭建一个搜索服务以及工作中常用的维护手段。 注：由于条件有限，本次介绍的是单机部署，没有用到分布式部署，后续会在这篇文章中更新分布式部署细节。 Linux下安装和部署1 下">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Elasticsearch-实践篇">
 <meta property="og:url" content="http://yoursite.com/2018/01/29/Elasticsearch-实践篇/index.html">
 <meta property="og:site_name" content="Jacob&#39;s Blog">
-<meta property="og:description" content="Elasticsearch实践前两篇文章初步介绍了Elasticsearch的基础和索引，因此第三篇我决定写一下如何利用Elasticsearch来搭建一个搜索服务以及工作中常用的维护手段。  注：由于条件有限，本次介绍的是单机部署，没有用到分布式部署，后续会在这篇文章中更新分布式部署细节。 Linux下安装和部署1 下载安装 大家可以从官网下载es的压缩包，也可以通过其他渠道获取相关资源，比如我">
+<meta property="og:description" content="Elasticsearch实践前两篇文章初步介绍了Elasticsearch的基础和索引，因此第三篇我决定写一下如何利用Elasticsearch来搭建一个搜索服务以及工作中常用的维护手段。 注：由于条件有限，本次介绍的是单机部署，没有用到分布式部署，后续会在这篇文章中更新分布式部署细节。 Linux下安装和部署1 下载安装 大家可以从官网下载es的压缩包，也可以通过其他渠道获取相关资源，比如我是">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/img/20170131/log2017013100.png">
 <meta property="og:image" content="http://yoursite.com/img/20170131/log2017013101.png">
 <meta property="og:image" content="http://yoursite.com/img/20170131/log2017013102.png">
-<meta property="og:updated_time" content="2018-01-31T07:45:15.000Z">
+<meta property="og:updated_time" content="2018-01-31T08:03:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Elasticsearch-实践篇">
-<meta name="twitter:description" content="Elasticsearch实践前两篇文章初步介绍了Elasticsearch的基础和索引，因此第三篇我决定写一下如何利用Elasticsearch来搭建一个搜索服务以及工作中常用的维护手段。  注：由于条件有限，本次介绍的是单机部署，没有用到分布式部署，后续会在这篇文章中更新分布式部署细节。 Linux下安装和部署1 下载安装 大家可以从官网下载es的压缩包，也可以通过其他渠道获取相关资源，比如我">
+<meta name="twitter:description" content="Elasticsearch实践前两篇文章初步介绍了Elasticsearch的基础和索引，因此第三篇我决定写一下如何利用Elasticsearch来搭建一个搜索服务以及工作中常用的维护手段。 注：由于条件有限，本次介绍的是单机部署，没有用到分布式部署，后续会在这篇文章中更新分布式部署细节。 Linux下安装和部署1 下载安装 大家可以从官网下载es的压缩包，也可以通过其他渠道获取相关资源，比如我是">
 <meta name="twitter:image" content="http://yoursite.com/img/20170131/log2017013100.png">
 
 
@@ -380,7 +380,7 @@
 
       
         <h2 id="Elasticsearch实践"><a href="#Elasticsearch实践" class="headerlink" title="Elasticsearch实践"></a>Elasticsearch实践</h2><p>前两篇文章初步介绍了Elasticsearch的基础和索引，因此第三篇我决定写一下如何利用Elasticsearch来搭建一个搜索服务以及工作中常用的维护手段。</p>
-<p><strong> 注：由于条件有限，本次介绍的是单机部署，没有用到分布式部署，后续会在这篇文章中更新分布式部署细节。</strong></p>
+<p><strong>注：由于条件有限，本次介绍的是单机部署，没有用到分布式部署，后续会在这篇文章中更新分布式部署细节。</strong></p>
 <h2 id="Linux下安装和部署"><a href="#Linux下安装和部署" class="headerlink" title="Linux下安装和部署"></a>Linux下安装和部署</h2><h3 id="1-下载安装"><a href="#1-下载安装" class="headerlink" title="1 下载安装"></a>1 下载安装</h3><ul>
 <li><p>大家可以从<a href="https://www.elastic.co/cn/" target="_blank" rel="noopener">官网</a>下载es的压缩包，也可以通过其他渠道获取相关资源，比如我是从官网下载的<code>elasticsearch-5.6.7.tar.gz</code>压缩包。</p>
 </li>
