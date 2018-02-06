@@ -28,8 +28,8 @@
 <p> <img src="/img/20180131/log2018013102.png" alt=""> </p>
 </li>
 </ul>
-<h3 id="2-创建数据"><a href="#2-创建数据" class="headerlink" title="2 创建数据"></a>2 创建数据</h3><pre><code>在基础篇中我们提到了，es提供了restful api接口来让我们很方便的操作数据，因此我们后续所有相关操作都会直接用curl发http请求来完成。
-</code></pre><ul>
+<h3 id="2-创建数据"><a href="#2-创建数据" class="headerlink" title="2 创建数据"></a>2 创建数据</h3><p>在基础篇中我们提到了，es提供了restful api接口来让我们很方便的操作数据，因此我们后续所有相关操作都会直接用curl发http请求来完成。</p>
+<ul>
 <li><p>创建索引：<code>curl -XPUT &#39;127.0.0.1:9200/index_v1&#39;</code>，创建完成之后可以查看一下创建的索引信息 <code>curl -XGET &#39;127.0.0.1:9200/index_v1?pretty&#39;</code>，加pretty是格式化返回结果，更直观。</p>
 <p> <img src="/img/20180131/log2018013104.png" alt=""> </p>
 <p>  返回结果包括三个核心信息：aliases（别名）、mappings（映射）、settings（配置），具体三个字段代表的信息可以从文档中搜索到。简单来说aliases是给这个索引加一个别名，这样可以通过别名来获取这个索引相关信息，这个在工程中是很好用的，重建索引的时候就需要利用别名的特性。mapping是和后面讲到的type类型相关，存储了字段属性信息。settings中有很多信息，这些是es默认加上的属性，具体也建议看一下es文档。</p>
