@@ -17,38 +17,34 @@
 <blockquote>
 <p>No Java runtime present, requesting install. Elasticsearch requires at least Java 8 but your Java version from /usr/bin/java does not meet this requirement</p>
 </blockquote>
+<p> <img src="/img/20180131/log2018013100.png" alt=""></p>
+<p>  相关问题错误信息已经描述很清楚了，毕竟es是用Java写的，因此需要安装Java环境并不过分对吧哈哈哈。Java环境安装就不在这里记录了，我用的是Mac，利用强大的homebrew工具分分钟解决。</p>
+<p>  安装好Java环境之后，重新启动es，如果不是后台运行，出现如下信息就代表成功了,</p>
+<p> <img src="/img/20180131/log2018013101.png" alt=""></p>
+<p>  如果是后台运行，<code>ps -ef | grep &#39;elas&#39;</code>看一下进程是否启动即可，如下</p>
+<p> <img src="/img/20180131/log2018013103.png" alt=""></p>
+</li>
+<li><p>测试： 在浏览器中输入<code>http://localhost:9200/</code>，出现如下信息就代表es已经正常运行了</p>
+<p> <img src="/img/20180131/log2018013102.png" alt=""> </p>
 </li>
 </ul>
-<p><img src="/img/20180131/log2018013100.png" alt=""></p>
-<pre><code>相关问题错误信息已经描述很清楚了，毕竟es是用Java写的，因此需要安装Java环境并不过分对吧哈哈哈。Java环境安装就不在这里记录了，我用的是Mac，利用强大的homebrew工具分分钟解决。
-
-安装好Java环境之后，重新启动es，如果不是后台运行，出现如下信息就代表成功了,
-</code></pre><p><img src="/img/20180131/log2018013101.png" alt=""></p>
-<pre><code>如果是后台运行，`ps -ef | grep &apos;elas&apos;`看一下进程是否启动即可，如下
-</code></pre><p><img src="/img/20180131/log2018013103.png" alt=""></p>
-<ul>
-<li>测试： 在浏览器中输入<code>http://localhost:9200/</code>，出现如下信息就代表es已经正常运行了</li>
-</ul>
-<p><img src="/img/20180131/log2018013102.png" alt=""> </p>
 <h3 id="2-创建数据"><a href="#2-创建数据" class="headerlink" title="2 创建数据"></a>2 创建数据</h3><pre><code>在基础篇中我们提到了，es提供了restful api接口来让我们很方便的操作数据，因此我们后续所有相关操作都会直接用curl发http请求来完成。
 </code></pre><ul>
-<li>创建索引：<code>curl -XPUT &#39;127.0.0.1:9200/index_v1&#39;</code>，创建完成之后可以查看一下创建的索引信息 <code>curl -XGET &#39;127.0.0.1:9200/index_v1?pretty&#39;</code>，加pretty是格式化返回结果，更直观。</li>
-</ul>
-<p><img src="/img/20180131/log2018013104.png" alt=""> </p>
-<pre><code>返回结果包括三个核心信息：aliases（别名）、mappings（映射）、settings（配置），具体三个字段代表的信息可以从文档中搜索到。简单来说aliases是给这个索引加一个别名，这样可以通过别名来获取这个索引相关信息，这个在工程中是很好用的，重建索引的时候就需要利用别名的特性。mapping是和后面讲到的type类型相关，存储了字段属性信息。settings中有很多信息，这些是es默认加上的属性，具体也建议看一下es文档。
-</code></pre><ul>
-<li>创建类型：索引相当于数据库，类型相当于表，在创建类型的时候需要设计好字段属性，也就是mapping，类型和映射往往是一起存在的。<br><code>curl -XPOST &#39;127.0.0.1:9200/index_v1/default/_mapping?pretty&#39; -d &#39;{&quot;default&quot;:{&quot;properties&quot;:{&quot;id&quot;:{&quot;type&quot;:&quot;string&quot;, &quot;index&quot;:&quot;not_analyzed&quot;}, &quot;name&quot;:{&quot;type&quot;:&quot;string&quot;, &quot;index&quot;:&quot;not_analyzed&quot;}}}}&#39;</code></li>
-</ul>
-<p><img src="/img/20180131/log2018013105.png" alt=""></p>
-<pre><code>type表示该字段类型，index中定义not_analyzed是表示该字段不分词，分词是搜索引擎中一个很重要的概念，有兴趣可以查资料深入研究下。
-</code></pre><ul>
+<li><p>创建索引：<code>curl -XPUT &#39;127.0.0.1:9200/index_v1&#39;</code>，创建完成之后可以查看一下创建的索引信息 <code>curl -XGET &#39;127.0.0.1:9200/index_v1?pretty&#39;</code>，加pretty是格式化返回结果，更直观。</p>
+<p> <img src="/img/20180131/log2018013104.png" alt=""> </p>
+<p>  返回结果包括三个核心信息：aliases（别名）、mappings（映射）、settings（配置），具体三个字段代表的信息可以从文档中搜索到。简单来说aliases是给这个索引加一个别名，这样可以通过别名来获取这个索引相关信息，这个在工程中是很好用的，重建索引的时候就需要利用别名的特性。mapping是和后面讲到的type类型相关，存储了字段属性信息。settings中有很多信息，这些是es默认加上的属性，具体也建议看一下es文档。</p>
+</li>
+<li><p>创建类型：索引相当于数据库，类型相当于表，在创建类型的时候需要设计好字段属性，也就是mapping，类型和映射往往是一起存在的。<br><code>curl -XPOST &#39;127.0.0.1:9200/index_v1/default/_mapping?pretty&#39; -d &#39;{&quot;default&quot;:{&quot;properties&quot;:{&quot;id&quot;:{&quot;type&quot;:&quot;string&quot;, &quot;index&quot;:&quot;not_analyzed&quot;}, &quot;name&quot;:{&quot;type&quot;:&quot;string&quot;, &quot;index&quot;:&quot;not_analyzed&quot;}}}}&#39;</code></p>
+<p> <img src="/img/20180131/log2018013105.png" alt=""></p>
+<p>  type表示该字段类型，index中定义not_analyzed是表示该字段不分词，分词是搜索引擎中一个很重要的概念，有兴趣可以查资料深入研究下。</p>
+</li>
 <li><p>写入数据：索引和类型都ready之后，就可以往es中写入应用数据了。应用中，可能数据源来自多个地方，可能每一份数据都不一样，不管源数据是什么样，我们都需要通过某种手段将数据格式化之后灌入es。灌es方式也有很多，往往是离线和在线相结合。这里我们只是通过最简单的http请求来写入数据。</p>
 <p> 我们创建了一个default类型，定义了两个字段id和name，写入数据可以这样：<code>curl -XPUT &#39;127.0.0.1:9200/index_v1/default/d123&#39; -d &#39;{&quot;id&quot;:&quot;d123&quot;,&quot;name&quot;:&quot;liuwei&quot;}&#39;</code>，和mysql类似，es也需要定义一个唯一标识id，工程中我们经常根据数据特征选取唯一标识。比如，这个示例中，我们将id作为唯一标识，执行之后会得到如下结果，如果需要格式化，加上<strong>?pretty</strong>即可。</p>
+<p><img src="/img/20180131/log2018013106.png" alt=""></p>
+<p> 工作中我们经常会利用脚本来批量更新es数据，感兴趣的同学可以看看python的es包，或者也可以利用es本身的bulk api来批量操作数据，但是总体来说利用python多线程加es bulk在实际工作中显得更加方便。</p>
 </li>
 </ul>
-<p><img src="/img/20180131/log2018013106.png" alt=""></p>
-<pre><code>工作中我们经常会利用脚本来批量更新es数据，感兴趣的同学可以看看python的es包，或者也可以利用es本身的bulk api来批量操作数据，但是总体来说利用python多线程加es bulk在实际工作中显得更加方便。
-</code></pre>]]></content>
+]]></content>
       
         <categories>
             
