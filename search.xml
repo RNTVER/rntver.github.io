@@ -45,32 +45,30 @@
 </li>
 </ul>
 <h2 id="搜索入门"><a href="#搜索入门" class="headerlink" title="搜索入门"></a>搜索入门</h2><p>下面我会给出几个基础但是常用的查询示例</p>
-<pre><code>1. 最简单的查询示例：`curl -XGET &apos;127.0.0.1:9200/index_v1/default/_search?pretty&apos;`，返回结果如下
-</code></pre><p>   <img src="/img/20180131/log2018013107.png" alt=""></p>
-<pre><code>也可以用完整的查询的格式：`curl -XGET &apos;127.0.0.1:9200/index_v1/default/_search?pretty&apos; -d &apos;{&quot;query&quot;: {&quot;match_all&quot;: {}}}&apos;`，结果都一样，针对实际业务中涉及到的查询场景多样化，我们通常这种格式化的查询会更多。
-
-测试中，我只写入了四条数据，针对这种大部分简单的业务查询，我们只需要关注这条查询语句的结果的hits字段。total是该索引的类型下全部数据条数，hits是返回的具体数据，不指定返回数据量的情况下，es会默认返回10条数据，有点类似业务中的数据分页。
-
-2. 根据文档id获取文档信息：`curl -XGET &apos;127.0.0.1:9200/index_v1/default/d123?pretty&apos;`，返回结果如下
-</code></pre><p>   <img src="/img/20180131/log2018013108.png" alt=""></p>
-<pre><code>3. 查询name为liuwei的数据：`curl -XGET &apos;127.0.0.1:9200/index_v1/default/_search?pretty&apos; -d &apos;{&quot;query&quot;: {&quot;match&quot;: {&quot;name&quot;: &quot;liuwei&quot;}}}&apos;`
-</code></pre><p>   <img src="/img/20180131/log2018013109.png" alt=""></p>
-<pre><code>这个查询就衍生出之前我们说到的分词问题，如果把liuwei改成liu，目前我们四条数据的name有liuwei、liubo，是否会出现两条数据呢，答案是可以出现也可以不出现，但是在这个测试case里面是不出现的，因为我们在设置mapping的时候将name字段设置成不分词，所以用match查询的时候是完整匹配才行。
-
-再看看这个：`curl -XGET &apos;127.0.0.1:9200/index_v1/default/_search?pretty&apos; -d &apos;{&quot;query&quot;: {&quot;term&quot;: {&quot;name&quot;: &quot;liuwei&quot;}}}&apos;`，这个结果是一样的。
-
-match查询我们可以认为是模糊查询，es会为输入的字符串进行分词，比如查询liuwei hello，会返回所有包括liuwei和hello的文档。
-
-term查询可以认为是精确查询。
-
-所以，通常根据业务需求，我们需要使用不同的策略。
-
-4. 布尔查询：作为最常用的组合查询，只能说它在业务中的表现是屡试不爽，很简单我们就可以实现 AND OR NOT这种布尔逻辑。
-
-我们需要知道三个关键词：should（条件可以满足也可以不满足）、must（条件必须满足）、must_not（条件不能满足），分别对应sql中的or、and、not。
-</code></pre><p>   <img src="/img/20180131/log2018013110.png" alt=""></p>
-<pre><code>上面是一个基本的should查询，实现功能就是找出name为liuwei或者liubo的数据，我们也可以随意组合，比如加入must，找出name为liuwei或者liubo，但是id必须为d123的数据。和sql的逻辑差不多，只是用不同的语言表现出来而已。
-</code></pre><p>以上我给出了4个最常见的es搜索示例，实际上项目中使用的可能比上述复杂的多，考虑的细节也有很多，比如统计，记分，语言分词等，具体需要我们在使用中查资料，积累经验，找寻最优解。</p>
+<ol>
+<li><p>最简单的查询示例：<code>curl -XGET &#39;127.0.0.1:9200/index_v1/default/_search?pretty&#39;</code>，返回结果如下</p>
+<p><img src="/img/20180131/log2018013107.png" alt=""></p>
+<p> 也可以用完整的查询的格式：<code>curl -XGET &#39;127.0.0.1:9200/index_v1/default/_search?pretty&#39; -d &#39;{&quot;query&quot;: {&quot;match_all&quot;: {}}}&#39;</code>，结果都一样，针对实际业务中涉及到的查询场景多样化，我们通常这种格式化的查询会更多。</p>
+<p> 测试中，我只写入了四条数据，针对这种大部分简单的业务查询，我们只需要关注这条查询语句的结果的hits字段。total是该索引的类型下全部数据条数，hits是返回的具体数据，不指定返回数据量的情况下，es会默认返回10条数据，有点类似业务中的数据分页。</p>
+</li>
+<li><p>根据文档id获取文档信息：<code>curl -XGET &#39;127.0.0.1:9200/index_v1/default/d123?pretty&#39;</code>，返回结果如下</p>
+<p><img src="/img/20180131/log2018013108.png" alt=""></p>
+</li>
+<li><p>查询name为liuwei的数据：<code>curl -XGET &#39;127.0.0.1:9200/index_v1/default/_search?pretty&#39; -d &#39;{&quot;query&quot;: {&quot;match&quot;: {&quot;name&quot;: &quot;liuwei&quot;}}}&#39;</code></p>
+<p><img src="/img/20180131/log2018013109.png" alt=""></p>
+<p> 这个查询就衍生出之前我们说到的分词问题，如果把liuwei改成liu，目前我们四条数据的name有liuwei、liubo，是否会出现两条数据呢，答案是可以出现也可以不出现，但是在这个测试case里面是不出现的，因为我们在设置mapping的时候将name字段设置成不分词，所以用match查询的时候是完整匹配才行。</p>
+<p> 再看看这个：<code>curl -XGET &#39;127.0.0.1:9200/index_v1/default/_search?pretty&#39; -d &#39;{&quot;query&quot;: {&quot;term&quot;: {&quot;name&quot;: &quot;liuwei&quot;}}}&#39;</code>，这个结果是一样的。</p>
+<p> match查询我们可以认为是模糊查询，es会为输入的字符串进行分词，比如查询liuwei hello，会返回所有包括liuwei和hello的文档。</p>
+<p> term查询可以认为是精确查询。</p>
+<p> 所以，通常根据业务需求，我们需要使用不同的策略。</p>
+</li>
+<li><p>布尔查询：作为最常用的组合查询，只能说它在业务中的表现是屡试不爽，很简单我们就可以实现 AND OR NOT这种布尔逻辑。</p>
+<p> 我们需要知道三个关键词：should（条件可以满足也可以不满足）、must（条件必须满足）、must_not（条件不能满足），分别对应sql中的or、and、not。</p>
+<p><img src="/img/20180131/log2018013110.png" alt=""></p>
+<p> 上面是一个基本的should查询，实现功能就是找出name为liuwei或者liubo的数据，我们也可以随意组合，比如加入must，找出name为liuwei或者liubo，但是id必须为d123的数据。和sql的逻辑差不多，只是用不同的语言表现出来而已。</p>
+</li>
+</ol>
+<p>以上我给出了4个最常见的es搜索示例，实际上项目中使用的可能比上述复杂的多，考虑的细节也有很多，比如统计，记分，语言分词等，具体需要我们在使用中查资料，积累经验，找寻最优解。</p>
 ]]></content>
       
         <categories>
